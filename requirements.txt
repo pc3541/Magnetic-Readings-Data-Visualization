@@ -4,6 +4,6 @@ matplotlib
 scipy
 numpy_ext
 datetime
-ipwidgets
+ipywidgets
 voila
 io
