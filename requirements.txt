@@ -1,0 +1,10 @@
+pandas
+numpy
+matplotlib.pyplot
+scipy
+numpy_ext
+datetime
+time
+ipwidgets
+voila
+io
