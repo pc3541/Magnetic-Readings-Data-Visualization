@@ -4,5 +4,5 @@ matplotlib==3.3.2
 numpy==1.20.3
 numpy_ext==0.9.6
 pandas==1.4.0
-scipy==1.5.2
+scipy
 voila==0.3.1
