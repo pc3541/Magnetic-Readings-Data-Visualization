@@ -14,9 +14,9 @@ import io
 
 st.sidebar.title("Magnetic Readings Data Visualization")
 input_file1 = st.sidebar.file_uploader("Upload first .raw file (for gradient/deviation analysis):")
-gradient_numerator = st.sidebar.number_input("nT: gradient threshold (_/min)", step=1)
-gradient_denominator = st.sidebar.number_input("min: gradient threshold (nT/_)", step=1)
-variation_from_chord = st.sidebar.number_input("nT: threshold for variation from 600s chord")
+gradient_numerator = st.sidebar.number_input("nT: gradient threshold (_/min)", value=10, step=1)
+gradient_denominator = st.sidebar.number_input("min: gradient threshold (nT/_)", value=10, step=1)
+variation_from_chord = st.sidebar.number_input("nT: threshold for variation from 600s chord", value=10, step=1)
 input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
 input_file2 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
 
