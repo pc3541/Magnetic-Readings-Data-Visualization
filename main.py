@@ -31,7 +31,6 @@ def getSec(s):
     return datee.hour * 3600 + datee.minute * 60 + datee.second
 
 def run():
-    st.write("Working...")
     df = pd.read_csv(input_file1, delim_whitespace=True, header=None)
     df = df.drop(df.columns[[0, 4]], axis=1)
     df = df.dropna()
