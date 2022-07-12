@@ -120,7 +120,7 @@ def run():
         y_lower = plt.gca().get_ylim()[0]
         y_upper = plt.gca().get_ylim()[1]
         for index, row in molecule.iterrows():
-            plt.vlines(x=[[row["Time"],row["Time2"]]], ymin=y_lower, ymax=y_upper, colors=row["Edges"], ls='--', lw=0.5, label=row["Line"])
+            plt.vlines(x=[[row["Time"],row["Time2"]]], ymin=y_lower, ymax=y_upper, colors="black", ls='--', lw=0.5, label=row["Line"])
         plt.xlabel("Time (sec)")
         plt.ylabel("Magnetic Readings (nT)")
         plt.legend(loc = 'upper left')
