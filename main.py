@@ -33,6 +33,7 @@ def getSec(s):
 
 def run():
     st.progress(10)
+    st.write("We made it this far")
     df = pd.read_csv(input_file1, delim_whitespace=True, header=None)
     df = df.drop(df.columns[[0, 4]], axis=1)
     df = df.dropna()
@@ -69,13 +70,13 @@ def run():
 
     dataframe_final["Gradients"] = abs((dataframe_final["Magnetic_Readings"].rolling(gradient_denominator.value*10).apply(calc_slope))*(gradient_denominator.value*60))
     df_merged_slopes = pd.merge(df_merged, dataframe_final, how='left')
-    plt.figure(figsize=(20,4))
-    plt.scatter(df_merged_slopes["Time"], df_merged_slopes["Gradients"], 0.25, "black")
-    plt.xlabel("Time (sec)")
-    plt.ylabel("Gradient (nT/" + str(gradient_denominator.value) + " min)")
-    plt.axhline(y=gradient_numerator.value, color='r', linestyle='-', label=("Threshold: " + str(gradient_numerator.value) + " nt/" + str(gradient_denominator.value) + " min"))
-    plt.legend(loc = 'upper left')
-    plt.show()
+    fig1 = plt.figure(figsize=(20,4))
+    fig1 = plt.scatter(df_merged_slopes["Time"], df_merged_slopes["Gradients"], 0.25, "black")
+    fig1 = plt.xlabel("Time (sec)")
+    fig1 = plt.ylabel("Gradient (nT/" + str(gradient_denominator.value) + " min)")
+    fig1 = plt.axhline(y=gradient_numerator.value, color='r', linestyle='-', label=("Threshold: " + str(gradient_numerator.value) + " nt/" + str(gradient_denominator.value) + " min"))
+    fig1 = plt.legend(loc = 'upper left')
+    st.pyplot(fig1)
 
     dataframe_final["600s Chord"] = abs(dataframe_final['Magnetic_Readings'].rolling(100, center=True).apply(lambda x: x.iloc[0]+x.iloc[-1]))/2
     df_merged_chord = pd.merge(df_merged, dataframe_final, how="left")
