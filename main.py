@@ -9,7 +9,6 @@ from numpy_ext import rolling_apply
 import datetime
 import time
 from matplotlib.pyplot import figure
-import voila
 import io
 
 st.sidebar.title("Magnetic Readings Data Visualization")
