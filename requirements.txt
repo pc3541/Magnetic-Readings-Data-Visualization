@@ -4,3 +4,4 @@ numpy
 matplotlib
 scipy
 numpy_ext
+datetime
