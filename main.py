@@ -13,12 +13,12 @@ import voila
 import io
 
 st.sidebar.title("Magnetic Readings Data Visualization")
-input_file1 = st.file_uploader("Upload first .raw file (for gradient/deviation analysis):")
-gradient_numerator = st.number_input("nT: gradient threshold (_/min)", step=1)
-gradient_denominator = st.number_input("min: gradient threshold (nT/_)", step=1)
-variation_from_chord = st.number_input("nT: threshold for variation from 600s chord")
-input_file2 = st.file_uploader("Upload second .raw file:")
-input_file2 = st.file_uploader("Upload .xyz file (flight lines):")
+input_file1 = st.sidebar.file_uploader("Upload first .raw file (for gradient/deviation analysis):")
+gradient_numerator = st.sidebar.number_input("nT: gradient threshold (_/min)", step=1)
+gradient_denominator = st.sidebar.number_input("min: gradient threshold (nT/_)", step=1)
+variation_from_chord = st.sidebar.number_input("nT: threshold for variation from 600s chord")
+input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
+input_file2 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
 
 time_list = list(range(0, 86401))
 
@@ -143,4 +143,4 @@ def run():
         plt.show()
 
 if st.button("Run analysis"):
-    run
+    run()
