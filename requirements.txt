@@ -1,8 +1,0 @@
-ipython
-ipywidgets
-matplotlib
-numpy
-numpy_ext
-pandas
-scipy
-voila
