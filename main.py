@@ -129,7 +129,7 @@ def run():
     else:
         fig = plt.figure(figsize=(20,4))
         plt.scatter(df_merged["Time"], df_merged["Magnetic_Readings"], 0.25, "black", label="Unit " + str(df_merged["Unit"].iat[0]))
-        plt.scatter(df_merged2["Time"], df_merged2["Magnetic_Readings"], 0.25, "grey", label="Unit " + str(df_merged["Unit"].iat[0]))
+        plt.scatter(df_merged2["Time"], df_merged2["Magnetic_Readings"], 0.25, "grey", label="Unit " + str(df_merged2["Unit"].iat[0]))
         y_lower = plt.gca().get_ylim()[0]
         y_upper = plt.gca().get_ylim()[1]
         x_bounds = plt.gca().get_xlim()
