@@ -68,13 +68,13 @@ def run():
     dataframe_final2["Time"] = dataframe_final2["Time"].astype(int)
     df_merged2 = pd.merge(df_time, dataframe_final2, on='Time')
 
-    dataframe_final["Gradients"] = abs((dataframe_final["Magnetic_Readings"].rolling(gradient_denominator.value*10).apply(calc_slope))*(gradient_denominator.value*60))
+    dataframe_final["Gradients"] = abs((dataframe_final["Magnetic_Readings"].rolling(gradient_denominator*10).apply(calc_slope))*(gradient_denominator*60))
     df_merged_slopes = pd.merge(df_merged, dataframe_final, how='left')
     fig1 = plt.figure(figsize=(20,4))
     fig1 = plt.scatter(df_merged_slopes["Time"], df_merged_slopes["Gradients"], 0.25, "black")
     fig1 = plt.xlabel("Time (sec)")
-    fig1 = plt.ylabel("Gradient (nT/" + str(gradient_denominator.value) + " min)")
-    fig1 = plt.axhline(y=gradient_numerator.value, color='r', linestyle='-', label=("Threshold: " + str(gradient_numerator.value) + " nt/" + str(gradient_denominator.value) + " min"))
+    fig1 = plt.ylabel("Gradient (nT/" + str(gradient_denominator) + " min)")
+    fig1 = plt.axhline(y=gradient_numerator, color='r', linestyle='-', label=("Threshold: " + str(gradient_numerator) + " nt/" + str(gradient_denominator) + " min"))
     fig1 = plt.legend(loc = 'upper left')
     st.pyplot(fig1)
 
@@ -85,15 +85,15 @@ def run():
     plt.scatter(df_merged_chord["Time"], df_merged_chord["Variation From 600s Chord"], 0.25, "black")
     plt.xlabel("Time (sec)")
     plt.ylabel("Variation From 600s Chord (nT)")
-    plt.axhline(y=variation_from_chord.value, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord.value) + " nt"))
+    plt.axhline(y=variation_from_chord, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord) + " nt"))
     plt.legend(loc = 'upper left')
     plt.show()
 
     aberrant = pd.DataFrame(columns=df_merged_chord.columns)
-    cond = df_merged_chord["Variation From 600s Chord"] > variation_from_chord.value
+    cond = df_merged_chord["Variation From 600s Chord"] > variation_from_chord
     rows = df_merged.loc[cond, :]
     aberrant = pd.concat([aberrant, rows], ignore_index=True)
-    cond = df_merged_slopes["Gradients"] > gradient_numerator.value
+    cond = df_merged_slopes["Gradients"] > gradient_numerator
     rows = df_merged.loc[cond, :]
     aberrant = pd.concat([aberrant, rows], ignore_index=True)
 
@@ -114,7 +114,7 @@ def run():
     molecule = molecule.astype(str)
     molecule = molecule.astype({'Line': 'int32',"Time":"float64", "Time2":"float64"})
 
-    if (df_merged_slopes["Gradients"] > gradient_numerator.value).any() == True or (df_merged_chord["Variation From 600s Chord"] > variation_from_chord.value).any() == True:
+    if (df_merged_slopes["Gradients"] > gradient_numerator).any() == True or (df_merged_chord["Variation From 600s Chord"] > variation_from_chord).any() == True:
         plt.figure(figsize=(20,4))
         plt.scatter(df_merged["Time"], df_merged["Magnetic_Readings"], 0.25, "black", label="Unit " + str(df_merged["Unit"].iat[0]))
         plt.scatter(df_merged2["Time"], df_merged2["Magnetic_Readings"], 0.25, "grey", label="Unit " + str(df_merged2["Unit"].iat[0]))
