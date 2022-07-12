@@ -18,7 +18,7 @@ gradient_numerator = st.sidebar.number_input("nT: gradient threshold (_/min)", v
 gradient_denominator = st.sidebar.number_input("min: gradient threshold (nT/_)", value=10, step=1)
 variation_from_chord = st.sidebar.number_input("nT: threshold for variation from 600s chord", value=10, step=1)
 input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
-input_file2 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
+input_file3 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
 
 time_list = list(range(0, 86401))
 
