@@ -56,7 +56,6 @@ def run():
     df2 = df2.dropna()
     dataframe2 = df2.astype(str)
     dataframe_final2 = dataframe2[~dataframe2.iloc[:,2].str.contains("?", regex=False)]
-    dataframe2 = dataframe2.astype(float)
     dataframe_final2 = dataframe2.astype(int)
     dataframe_final2[dataframe_final2.columns[3]] = dataframe_final2[dataframe_final2.columns.values[3]]/10
     dataframe_final2.columns = ["Unit","Date","Time", "Magnetic_Readings"]
