@@ -142,5 +142,5 @@ def run():
         plt.legend(loc = 'upper left')
         plt.show()
 
-if st.button("Run analysis"):
+if st.sidebar.button("Run analysis"):
     run()
