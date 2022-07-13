@@ -15,7 +15,8 @@ st.sidebar.title("Magnetic Readings Data Visualization")
 input_file1 = st.sidebar.file_uploader("Upload first .raw file (for gradient/deviation analysis):")
 gradient_numerator = st.sidebar.number_input("nT: gradient threshold (_/min)", value=10, step=1)
 gradient_denominator = st.sidebar.number_input("min: gradient threshold (nT/_)", value=10, step=1)
-variation_from_chord = st.sidebar.number_input("nT: threshold for variation from 600s chord", value=10, step=1)
+variation_from_chord = st.sidebar.number_input("nT: threshold for variation from chord", value=10, step=1)
+variation_chord_duration = st.sidebar.number_input("min: chord duration", value=10, step=1)
 input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
 input_file3 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
 
@@ -76,14 +77,14 @@ def run():
     plt.legend(loc = 'upper left')
     st.pyplot(fig)
 
-    dataframe_final["600s Chord"] = abs(dataframe_final['Magnetic_Readings'].rolling(100, center=True).apply(lambda x: x.iloc[0]+x.iloc[-1]))/2
+    dataframe_final["Chord"] = abs(dataframe_final['Magnetic_Readings'].rolling(variation_chord_duration*10, center=True).apply(lambda x: x.iloc[0]+x.iloc[-1]))/2
     df_merged_chord = pd.merge(df_merged, dataframe_final, how="left")
-    df_merged_chord["Variation From 600s Chord"] = abs(df_merged_chord['Magnetic_Readings'] - df_merged_chord["600s Chord"])
+    df_merged_chord["Variation From Chord"] = abs(df_merged_chord['Magnetic_Readings'] - df_merged_chord["Chord"])
     fig = plt.figure(figsize=(20,4))
-    plt.scatter(df_merged_chord["Time"], df_merged_chord["Variation From 600s Chord"], 0.25, "black")
+    plt.scatter(df_merged_chord["Time"], df_merged_chord["Variation From Chord"], 0.25, "black")
     plt.xlabel("Time (sec)")
-    plt.ylabel("Variation From 600s Chord (nT)")
-    plt.axhline(y=variation_from_chord, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord) + " nt"))
+    plt.ylabel("Variation From " + str(variation_chord_duration) + " min Chord (nT)")
+    plt.axhline(y=variation_from_chord, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord) + " nt/" + str(variation_chord_duration))
     plt.legend(loc = 'upper left')
     st.pyplot(fig)
 
