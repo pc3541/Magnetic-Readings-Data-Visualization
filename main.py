@@ -84,7 +84,7 @@ def run():
     plt.scatter(df_merged_chord["Time"], df_merged_chord["Variation From Chord"], 0.25, "black")
     plt.xlabel("Time (sec)")
     plt.ylabel("Variation From " + str(variation_chord_duration) + " min Chord (nT)")
-    plt.axhline(y=variation_from_chord, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord) + " nt/" + str(variation_chord_duration)))
+    plt.axhline(y=variation_from_chord, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord) + " nt/" + str(variation_chord_duration) + " min"))
     plt.legend(loc = 'upper left')
     st.pyplot(fig)
 
