@@ -113,7 +113,7 @@ def run():
     molecule = molecule.astype(str)
     molecule = molecule.astype({'Line': 'int32',"Time":"float64", "Time2":"float64"})
 
-    if (df_merged_slopes["Gradients"] > gradient_numerator).any() == True or (df_merged_chord["Variation From 600s Chord"] > variation_from_chord).any() == True:
+    if (df_merged_slopes["Gradients"] > gradient_numerator).any() == True or (df_merged_chord["Variation From Chord"] > variation_from_chord).any() == True:
         fig = plt.figure(figsize=(20,4))
         plt.scatter(df_merged["Time"], df_merged["Magnetic_Readings"], 0.25, "black", label="Unit " + str(df_merged["Unit"].iat[0]))
         plt.scatter(df_merged2["Time"], df_merged2["Magnetic_Readings"], 0.25, "grey", label="Unit " + str(df_merged2["Unit"].iat[0]))
