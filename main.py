@@ -89,7 +89,7 @@ def run():
     st.pyplot(fig)
 
     aberrant = pd.DataFrame(columns=df_merged_chord.columns)
-    cond = df_merged_chord["Variation From 600s Chord"] > variation_from_chord
+    cond = df_merged_chord["Variation From Chord"] > variation_from_chord
     rows = df_merged.loc[cond, :]
     aberrant = pd.concat([aberrant, rows], ignore_index=True)
     cond = df_merged_slopes["Gradients"] > gradient_numerator
