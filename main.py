@@ -133,7 +133,7 @@ def run():
             plt.text(row["Time"],y_upper,row["Line"],rotation="vertical",fontsize=7.5)
         plt.xlabel("Time (sec)")
         plt.ylabel("Magnetic Readings (nT)")
-        plt.legend(loc = 'upper left')
+        plt.legend(loc = 'lower right')
         plt.xlim(time_start, time_end)
         st.pyplot(fig)
     else:
@@ -147,7 +147,7 @@ def run():
             plt.text(row["Time"],y_upper,row["Line"],rotation="vertical",fontsize=7.5)
         plt.xlabel("Time (sec)")
         plt.ylabel("Magnetic Readings (nT)")
-        plt.legend(loc = 'upper left')
+        plt.legend(loc = 'lower right')
         plt.xlim(time_start, time_end)
         st.pyplot(fig)
 
