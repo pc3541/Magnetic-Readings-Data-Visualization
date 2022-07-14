@@ -102,14 +102,10 @@ def run():
     rows = df_merged.loc[cond, :]
     aberrant = pd.concat([aberrant, rows], ignore_index=True)
 
-    molecule = pd.read_csv(input_file3, names=['Line', 'Aircraft', 'Flight', 'YYMMDD', 'Date', 'Time', 'DateU',
-   'TimeU', 'Zn', 'Easting', 'Northing', 'Lat', 'Long', 'xTrack',
-   'Knots2D', 'Knots3D', 'KnotsAir', 'ZFid_ms', 'KFid', 'AFid', 'MagTF1U',
-   'Mag8D', 'VecX', 'VecY', 'VecZ', 'VecTF', 'MagRatio', 'GPSHt', 'Undul',
-   'Sats', 'HDop', 'DGPS', 'RadAlt', 'BaroHPa', 'Temp', 'Humid', 'AN5_v',
-   'Dn', 'Up', 'Samp', 'Live', 'RawTC', 'RawK', 'RawU', 'RawTh', 'RawUp_U',
-   'Cosm', 'OrigCSum'],delim_whitespace=True, skiprows=[0,1,2], header=None)
-    molecule = molecule[["Line","Date","Time"]]
+    molecule = pd.read_csv(input_file3, delim_whitespace=True, header=[0])
+    molecule = molecule[["/","Time","DateU"]]
+    molecule = molecule.tail(-2)
+    molecule.rename({'/': 'Line', 'Time': 'Date', 'DateU': 'Time'}, axis=1, inplace=True)
     molecule = molecule.replace('*', np.NaN)
     molecule = molecule.dropna()
     molecule = molecule.groupby('Line').apply(lambda x: x.iloc[[-1, 0]]).reset_index(drop=True)
