@@ -30,7 +30,7 @@ def calc_slope(x):
     return slope
 
 def getSec(s):
-    datee = datetime.datetime.strptime(s, "%H%M%S")
+    datee = datetime.datetime.strptime(s, "%HH%MM%SS")
     return datee.hour * 3600 + datee.minute * 60 + datee.second
 
 def run():
