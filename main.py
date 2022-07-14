@@ -19,8 +19,8 @@ variation_from_chord = st.sidebar.number_input("nT: threshold for variation from
 variation_chord_duration = st.sidebar.number_input("min: chord duration", value=10, step=1)
 input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
 input_file3 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
-time_start1 = st.sidebar.number_input("Desired time segment start (HHMMSS)", value=0, step=1)
-time_end1 = st.sidebar.number_input("Desired time segment end (HHMMSS)", value=240000, step=1)
+time_start1 = st.sidebar.text_input("Desired time segment start (HHMMSS):", value="000000")
+time_end1 = st.sidebar.text_input("Desired time segment end (HHMMSS):", value="240000")
 
 time_list = list(range(0, 86401))
 
