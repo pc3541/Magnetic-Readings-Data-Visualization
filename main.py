@@ -119,7 +119,7 @@ def run():
     molecule = molecule.astype(str)
     molecule = molecule.astype({'Line': 'int32',"Time":"float64", "Time2":"float64"})
     molecule = molecule[molecule.Time > time_start]
-    molecule = molecule[molecule.Time > time_end]
+    molecule = molecule[molecule.Time < time_end]
 
     if (df_merged_slopes["Gradients"] > gradient_numerator).any() == True or (df_merged_chord["Variation From Chord"] > variation_from_chord).any() == True:
         fig = plt.figure(figsize=(20,4))
