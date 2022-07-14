@@ -19,6 +19,8 @@ variation_from_chord = st.sidebar.number_input("nT: threshold for variation from
 variation_chord_duration = st.sidebar.number_input("min: chord duration", value=10, step=1)
 input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
 input_file3 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
+time_start = st.sidebar.number_input("Desired time segment start (HHMMSS)", value=0, step=1)
+time_end = st.sidebar.number_input("Desired time segment end (HHMMSS)", value=240000, step=1)
 
 time_list = list(range(0, 86401))
 
@@ -32,6 +34,8 @@ def getSec(s):
     return datee.hour * 3600 + datee.minute * 60 + datee.second
 
 def run():
+    time_start = getSec(time_start)
+    time_end = getSec(time_end)
     df = pd.read_csv(input_file1, delim_whitespace=True, header=None)
     df = df.drop(df.columns[[0, 4]], axis=1)
     df = df.dropna()
@@ -75,6 +79,7 @@ def run():
     plt.ylabel("Gradient (nT/" + str(gradient_denominator) + " min)")
     plt.axhline(y=gradient_numerator, color='r', linestyle='-', label=("Threshold: " + str(gradient_numerator) + " nt/" + str(gradient_denominator) + " min"))
     plt.legend(loc = 'upper left')
+    plt.xlim(time_start, time_end)
     st.pyplot(fig)
 
     dataframe_final["Chord"] = abs(dataframe_final['Magnetic_Readings'].rolling(variation_chord_duration*10, center=True).apply(lambda x: x.iloc[0]+x.iloc[-1]))/2
@@ -86,6 +91,7 @@ def run():
     plt.ylabel("Variation From " + str(variation_chord_duration) + " min Chord (nT)")
     plt.axhline(y=variation_from_chord, color='r', linestyle='-', label=("Threshold: " + str(variation_from_chord) + " nt/" + str(variation_chord_duration) + " min"))
     plt.legend(loc = 'upper left')
+    plt.xlim(time_start, time_end)
     st.pyplot(fig)
 
     aberrant = pd.DataFrame(columns=df_merged_chord.columns)
@@ -126,6 +132,7 @@ def run():
         plt.xlabel("Time (sec)")
         plt.ylabel("Magnetic Readings (nT)")
         plt.legend(loc = 'upper left')
+        plt.xlim(time_start, time_end)
         st.pyplot(fig)
     else:
         fig = plt.figure(figsize=(20,4))
@@ -133,13 +140,13 @@ def run():
         plt.scatter(df_merged2["Time"], df_merged2["Magnetic_Readings"], 0.25, "grey", label="Unit " + str(df_merged2["Unit"].iat[0]))
         y_lower = plt.gca().get_ylim()[0]
         y_upper = plt.gca().get_ylim()[1]
-        x_bounds = plt.gca().get_xlim()
         for index, row in molecule.iterrows():
             plt.vlines(x=[[row["Time"],row["Time2"]]], ymin=y_lower, ymax=y_upper, colors="black", ls='--', lw=0.5)
             plt.text(row["Time"],y_upper,row["Line"],rotation="vertical",fontsize=7.5)
         plt.xlabel("Time (sec)")
         plt.ylabel("Magnetic Readings (nT)")
         plt.legend(loc = 'upper left')
+        plt.xlim(time_start, time_end)
         st.pyplot(fig)
 
 if st.sidebar.button("Run analysis"):
