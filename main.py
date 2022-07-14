@@ -19,8 +19,8 @@ variation_from_chord = st.sidebar.number_input("nT: threshold for variation from
 variation_chord_duration = st.sidebar.number_input("min: chord duration", value=10, step=1)
 input_file2 = st.sidebar.file_uploader("Upload second .raw file:")
 input_file3 = st.sidebar.file_uploader("Upload .xyz file (flight lines):")
-time_start = st.sidebar.number_input("Desired time segment start (HHMMSS)", value=0, step=1)
-time_end = st.sidebar.number_input("Desired time segment end (HHMMSS)", value=240000, step=1)
+time_start1 = st.sidebar.number_input("Desired time segment start (HHMMSS)", value=0, step=1)
+time_end1 = st.sidebar.number_input("Desired time segment end (HHMMSS)", value=240000, step=1)
 
 time_list = list(range(0, 86401))
 
@@ -34,8 +34,8 @@ def getSec(s):
     return datee.hour * 3600 + datee.minute * 60 + datee.second
 
 def run():
-    time_start = getSec(str(time_start))
-    time_end = getSec(str(time_end))
+    time_start = getSec(str(time_start1))
+    time_end = getSec(str(time_end1))
     df = pd.read_csv(input_file1, delim_whitespace=True, header=None)
     df = df.drop(df.columns[[0, 4]], axis=1)
     df = df.dropna()
