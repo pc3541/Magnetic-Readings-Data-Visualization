@@ -34,7 +34,7 @@ def getSec(s):
     return datee.hour * 3600 + datee.minute * 60 + datee.second
 
 def run():
-    time_start = getSec(str(time_start)
+    time_start = getSec(str(time_start))
     time_end = getSec(str(time_end))
     df = pd.read_csv(input_file1, delim_whitespace=True, header=None)
     df = df.drop(df.columns[[0, 4]], axis=1)
