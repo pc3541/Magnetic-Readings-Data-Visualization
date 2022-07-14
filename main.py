@@ -30,12 +30,14 @@ def calc_slope(x):
     return slope
 
 def getSec(s):
-    datee = datetime.datetime.strptime(s, "%HH%MM%SS")
+    datee = datetime.datetime.strptime(s, "%H%M%S")
     return datee.hour * 3600 + datee.minute * 60 + datee.second
 
 def run():
-    time_start = getSec(time_start1)
-    time_end = getSec(time_end1)
+    time_start2 = int(time_start1)
+    time_end2 = int(time_end1)
+    time_start = getSec(str(time_start2))
+    time_end = getSec(str(time_end2))
     df = pd.read_csv(input_file1, delim_whitespace=True, header=None)
     df = df.drop(df.columns[[0, 4]], axis=1)
     df = df.dropna()
