@@ -103,9 +103,9 @@ def run():
     aberrant = pd.concat([aberrant, rows], ignore_index=True)
 
     molecule = pd.read_csv(input_file3, delim_whitespace=True, header=[0])
-    molecule = molecule[["/","Time","DateU"]]
+    molecule = molecule[["/","YYMMDD","Date"]]
     molecule = molecule.tail(-2)
-    molecule.rename({'/': 'Line', 'Time': 'Date', 'DateU': 'Time'}, axis=1, inplace=True)
+    molecule.rename({'/': 'Line', 'YYMMDD': 'Date', 'Date': 'Time'}, axis=1, inplace=True)
     molecule = molecule.replace('*', np.NaN)
     molecule = molecule.dropna()
     molecule = molecule.groupby('Line').apply(lambda x: x.iloc[[-1, 0]]).reset_index(drop=True)
